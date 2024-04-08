@@ -4,7 +4,7 @@ run-name: Tests 🧪
 
 on:
   workflow_dispatch:
-  pull_request:
+#  pull_request:
 
 jobs:
   tests:
@@ -16,10 +16,10 @@ jobs:
       - name: 📦 Set up Poetry
         run: pipx install poetry==1.7.0
 
-      - name: 🐍 Set up Python 3.11
+      - name: 🐍 Set up Python 3.9
         uses: actions/setup-python@v4
         with:
-          python-version: 3.11
+          python-version: 3.9
           cache: poetry
 
       - name: 🔨 Install dependencies

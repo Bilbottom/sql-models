@@ -4,15 +4,16 @@ build-backend = "poetry.core.masonry.api"
 
 
 [tool.poetry]
-name = "python-template"
+name = "bills-sql-models"
 version = "0.0.0"
-description = ""
+description = "Stand-alone SQL models."
 authors = ["Bilbottom"]
 readme = "README.md"
-packages = [{include = "src"}]
+packages = [{include = "sql_schema_models"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.9"
+duckdb = "0.9.2"  # Pinned for JetBrains compatibility
 
 [tool.poetry.group]
 dev.optional = true
