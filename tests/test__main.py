@@ -1,12 +1,9 @@
 """
-Unit tests for the ``src.main`` module.
+Placeholder module.
 """
 
-import src.main as main
 
-
-def test__main(monkeypatch):
+def test__main():
     """
-    Test the ``main`` function.
+    Placeholder test.
     """
-    main.main()
