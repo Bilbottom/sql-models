@@ -16,7 +16,7 @@
 
 ---
 
-# SQL Schema Models
+# SQL Models
 
 Stand-alone SQL models.
 
