@@ -4,6 +4,7 @@
 *.xls?
 *.json
 *.db
+*.db.wal
 
 # System files
 .idea/
