@@ -1,31 +1,43 @@
 
+/*
+create schema if not exists loans;
+use loans;
+*/
+
 drop table if exists customers;
-create table customers(
+drop table if exists customer_relationships;
+drop table if exists loans;
+drop table if exists balances;
+
+
+create table customers (
     customer_id text not null primary key,
-    customer_type text not null check (customer_type in ('Business', 'Individual', 'Lending Group'))
+    customer_type text not null check (
+        customer_type in ('Business', 'Individual', 'Lending Group')
+    )
 );
 
-drop table if exists customer_relationships;
-create table customer_relationships(
+create table customer_relationships (
     parent_customer_id text not null,
     child_customer_id text not null,
-    relationship_type text not null check (relationship_type in ('Subsidiary', 'Director')),
+    /* "`child_customer_id` is a `relationship_type` of `parent_customer_id`" */
+    relationship_type text not null check (
+        relationship_type in ('Subsidiary', 'Director')
+    ),
 
     primary key (parent_customer_id, child_customer_id),
     foreign key (parent_customer_id) references customers(customer_id),
     foreign key (child_customer_id) references customers(customer_id)
 );
 
-drop table if exists loans;
-create table loans(
+create table loans (
     loan_id text not null primary key,
     loan_value real not null check (loan_value > 0),
     customer_id text not null references customers(customer_id)
 );
 
-/* This is purposefully missing some utility columns (such as `to_date` and `current_flag`) */
-drop table if exists balances;
-create table balances(
+/* This is purposefully missing some utility columns and indexes */
+create table balances (
     loan_id text not null,
     balance_date date not null,
     balance real not null,
@@ -35,7 +47,10 @@ create table balances(
 );
 
 
-insert into customers(customer_id, customer_type)
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+insert into customers (customer_id, customer_type)
 values
     ('BUS116595', 'Business'),
     ('BUS154890', 'Business'),
@@ -61,7 +76,7 @@ values
 ;
 
 
-insert into customer_relationships(parent_customer_id, child_customer_id, relationship_type)
+insert into customer_relationships (parent_customer_id, child_customer_id, relationship_type)
 values
     ('LEN559852', 'BUS484532', 'Subsidiary'),
     ('LEN559852', 'BUS154890', 'Subsidiary'),
@@ -88,7 +103,7 @@ values
 ;
 
 
-insert into loans(loan_id, loan_value, customer_id)
+insert into loans (loan_id, loan_value, customer_id)
 values
     ('LOA123046', 26000, 'BUS154890'),
     ('LOA156487', 113000, 'BUS154890'),
