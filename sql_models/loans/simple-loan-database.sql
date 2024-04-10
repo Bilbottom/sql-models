@@ -4,10 +4,10 @@ create schema if not exists loans;
 use loans;
 */
 
-drop table if exists customers;
-drop table if exists customer_relationships;
-drop table if exists loans;
 drop table if exists balances;
+drop table if exists loans;
+drop table if exists customer_relationships;
+drop table if exists customers;
 
 
 create table customers (
