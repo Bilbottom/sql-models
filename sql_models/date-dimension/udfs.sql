@@ -1,6 +1,10 @@
 
 /*
-    Assuming 08:30 to 17:30 working hours
+    Calculate the total working hours between two dates.
+
+    Assuming 08:30 to 17:30 working hours.
+
+    TODO: Convert to DuckDB syntax and make an actual UDF.
 */
 WITH
     raw_data AS (
@@ -24,7 +28,7 @@ WITH
             ) AS part_1,  /* Working minutes on first day */
             (
                 SELECT COUNT(*)
-                FROM calendar
+                FROM dates.calendar
                 WHERE day_name NOT IN ('Saturday', 'Sunday')
                   AND full_date > DATE(from_date)
                   AND full_date < DATE(to_date)
