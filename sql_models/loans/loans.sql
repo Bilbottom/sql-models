@@ -1,7 +1,6 @@
-
 /*
-create schema if not exists loans;
-use loans;
+This script should work on most SQL databases (at least, transactional
+ones).
 */
 
 drop table if exists balances;
@@ -26,14 +25,14 @@ create table customer_relationships (
     ),
 
     primary key (parent_customer_id, child_customer_id),
-    foreign key (parent_customer_id) references customers(customer_id),
-    foreign key (child_customer_id) references customers(customer_id)
+    foreign key (parent_customer_id) references customers (customer_id),
+    foreign key (child_customer_id) references customers (customer_id)
 );
 
 create table loans (
     loan_id text not null primary key,
     loan_value real not null check (loan_value > 0),
-    customer_id text not null references customers(customer_id)
+    customer_id text not null references customers (customer_id)
 );
 
 /* This is purposefully missing some utility columns and indexes */
@@ -43,7 +42,7 @@ create table balances (
     balance real not null,
 
     primary key (loan_id, balance_date),
-    foreign key (loan_id) references loans(loan_id)
+    foreign key (loan_id) references loans (loan_id)
 );
 
 

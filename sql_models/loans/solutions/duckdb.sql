@@ -338,7 +338,7 @@ order by date_axis.reporting_month
 
 /* Customer relationships */
 copy (
-        select 'flowchart TD' as line
+        select 'flowchart TD'
     union all
         select
             format(
@@ -353,17 +353,16 @@ to 'sql_models/loans/solutions/customer-relationships.mermaid' (
     header false,
     quote '',
     delimiter E'\n'
-)
-;
+);
 
 
 /* Relationships with loans */
 copy (
-        select 'flowchart TD' as line
+        select 'flowchart TD'
     union all
         select
             format(
-                '    {:s} ----> {:s}',
+                '    {:s} ---> {:s}',
                 parent_customer_id,
                 child_customer_id
             )
@@ -383,4 +382,25 @@ to 'sql_models/loans/solutions/relationships-with-loans.mermaid' (
     header false,
     quote '',
     delimiter E'\n'
+);
+
+
+/* Described relationships with loans */
+copy (
+        select 'flowchart TD'
+    union all
+        select format(
+            '    {:s} -- {:s} ---> {:s}',
+            parent_customer_id, relationship_type, child_customer_id
+        )
+        from loans.customer_relationships
+    union all
+        select format(
+            '    {:s} --- {:s}{{{{"{:s}\n({:t,})"}}}}',
+            customer_id, loan_id, loan_id, loan_value::int
+        )
+        from loans.loans
+)
+to 'sql_models/loans/solutions/relationships-with-loans.mermaid' (
+    header false, quote '', delimiter E'\n'
 )
