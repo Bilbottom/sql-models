@@ -4,12 +4,14 @@
 >
 > This is a simple database model for a loan company.
 
+## Model 📚
+
 There are four tables:
 
-- `loans` with information about the loans
-- `balances` with the loan balances over time
 - `customers` with information about the customers
 - `customer_relationships` with the relationships between the customers (to model family trees)
+- `loans` with information about the loans
+- `balances` with the loan balances over time
 
 The "customers" in this model can be individuals, businesses, or lending groups (a collection of businesses).
 
@@ -19,7 +21,7 @@ Loans can be associated with individuals, businesses, or lending groups, and eac
 
 The `balances` table has a new row each time the balance on a loan changes. This means that the "current balance" on a loan will be the balance with the most recent `balance_date`; similarly, the balance at a specific point in time will be the latest balance before that time.
 
-## Exercises
+## Exercises 🧩
 
 Exercises to complete on the loan database are below. The columns expected in the result set are described after the question.
 
@@ -82,3 +84,9 @@ Exercises to complete on the loan database are below. The columns expected in th
 15. Write a query to show the sum of month-end balances for each month from 2020-01 to 2023-03, inclusive.
 
     Expected columns are `reporting_month`, `balance`.
+
+## Solutions ✅
+
+Check out the (result set) solutions at:
+
+- [solutions/solutions.md](solutions/solutions.md)
