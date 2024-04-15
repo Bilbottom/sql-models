@@ -5,11 +5,11 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "bills-sql-models"
-version = "0.0.2"
+version = "0.0.3"
 description = "Stand-alone SQL models."
 authors = ["Bilbottom"]
 readme = "README.md"
-packages = [{include = "sql_models"}]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.9"
