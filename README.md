@@ -30,6 +30,6 @@ Almost all data models can be improved by adding a calendar table which has date
 
 This model extends this by including holidays and additional columns.
 
-### Loans
+### [Loans](sql_models/loans/README.md)
 
 Simple loan and customer tables.

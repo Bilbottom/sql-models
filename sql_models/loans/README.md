@@ -41,7 +41,7 @@ Exercises to complete on the loan database are below. The columns expected in th
 
     Expected columns are `customer_id`, `loan_value`.
 
-5.  Write a query that returns which businesses have both at least one director and belong to a lending group.
+5.  Write a query that returns which businesses have both at least one director and are a subsidiary of a lending group.
 
     Expected columns are `customer_id`.
 
