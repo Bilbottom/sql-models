@@ -22,15 +22,17 @@ order by customers.customer_type
 
 
 /* Q3 */
-select customers.customer_id
+select customer_id
 from loans.customers
-    left join loans.customer_relationships
-        on  customers.customer_id = customer_relationships.parent_customer_id
-        and customer_relationships.relationship_type = 'Director'
-where customers.customer_type = 'Business'
-group by customers.customer_id
-having count(*) >= 2
-order by customers.customer_id
+    semi join (
+        select parent_customer_id as customer_id
+        from loans.customer_relationships
+        where relationship_type = 'Director'
+        group by parent_customer_id
+        having count(*) >= 2
+    ) using (customer_id)
+where customer_type in ('Business', 'Lending Group')
+order by customer_id
 ;
 
 
