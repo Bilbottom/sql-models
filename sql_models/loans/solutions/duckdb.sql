@@ -1,3 +1,7 @@
+/*
+Solutions for DuckDB (0.9.2).
+*/
+
 
 /* Q1 */
 select
@@ -5,7 +9,7 @@ select
     count(*) as customer_count
 from loans.customers
 group by all
-order by customer_type
+order by all
 ;
 
 
@@ -17,7 +21,7 @@ from loans.customers
     left join loans.loans
         using (customer_id)
 group by all
-order by customers.customer_type
+order by all
 ;
 
 
@@ -32,7 +36,7 @@ from loans.customers
         having count(*) >= 2
     ) using (customer_id)
 where customer_type in ('Business', 'Lending Group')
-order by customer_id
+order by all
 ;
 
 
@@ -45,7 +49,7 @@ from loans.customers
         using (customer_id)
 where customers.customer_type = 'Business'
 group by all
-order by customers.customer_id
+order by all
 ;
 
 
@@ -64,7 +68,7 @@ from loans.customers
             where customer_type = 'Lending Group'
         )
 where customers.customer_type = 'Business'
-order by customers.customer_id
+order by all
 ;
 
 
@@ -85,7 +89,7 @@ union all
         inner join loans.customer_relationships as child
             on  parent.child_customer_id = child.parent_customer_id
     where parent.parent_customer_id = 'LEN559852'
-order by customer_id
+order by all
 ;
 
 
@@ -103,7 +107,7 @@ with recursive descendants as (
 
 select distinct customer_id
 from descendants
-order by customer_id
+order by all
 ;
 
 
@@ -136,7 +140,7 @@ with recursive relatives as (
 
 select distinct customer_id
 from relatives
-order by customer_id
+order by all
 ;
 
 
@@ -254,7 +258,7 @@ select
     balance
 from loans.balances
 qualify balance_date = max(balance_date) over (partition by loan_id)
-order by loan_id
+order by all
 ;
 
 
@@ -265,15 +269,15 @@ select
 from loans.balances
 where balance_date <= '2020-12-31'
 qualify balance_date = max(balance_date) over (partition by loan_id)
-order by loan_id
+order by all
 ;
 
 
 /* Q15 -- approach 1 (asof with complete axis) */
 with recursive
 
-dates as (
-        select '2020-02-01'::date as next_month
+dates(next_month) as (
+        select '2020-02-01'::date
     union all
         select next_month + interval '1 month'
         from dates
@@ -296,16 +300,16 @@ from axis
     asof left join loans.balances
         on  axis.loan_id = balances.loan_id
         and axis.next_month > balances.balance_date
-group by axis.reporting_month
-order by axis.reporting_month
+group by all
+order by all
 ;
 
 
 /* Q15 -- approach 2 (lateral) */
 with recursive
 
-dates as (
-        select '2020-02-01'::date as next_month
+dates(next_month) as (
+        select '2020-02-01'::date
     union all
         select next_month + interval '1 month'
         from dates
@@ -329,14 +333,13 @@ from date_axis
         where date_axis.next_month > balances.balance_date
         qualify balance_date = max(balance_date) over (partition by loan_id)
     ) as balances
-group by date_axis.reporting_month
-order by date_axis.reporting_month
+group by all
+order by all
 ;
 
 
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
-;
 
 /* Customer relationships */
 copy (
