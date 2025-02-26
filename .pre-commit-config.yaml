@@ -45,12 +45,3 @@ repos:
     hooks:
       - id: prettier
         name: Make code pretty
-
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.8.6
-    hooks:
-      - id: ruff
-        name: Lint Python code
-        args: ["--fix"]
-      - id: ruff-format
-        name: Format Python code
