@@ -1,10 +1,10 @@
 [project]
 name = "bills-sql-models"
-version = "0.0.3"
+version = "0.0.4"
 description = "Stand-alone SQL models."
 authors = [{name = "Bilbottom"}]
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 dynamic = ["dependencies"]
 
 [build-system]
@@ -16,50 +16,10 @@ build-backend = "poetry.core.masonry.api"
 package-mode = false
 
 [tool.poetry.dependencies]
-duckdb = "1.0.0"
+duckdb = "1.2.0"
 
 [tool.poetry.group]
 dev.optional = false
-test.optional = false
 
 [tool.poetry.group.dev.dependencies]
-coverage-badge = "^1.1.0"
 pre-commit = "^3.6.2"
-pylint = "3.1.0"
-
-[tool.poetry.group.test.dependencies]
-pytest = "^8.0.2"
-pytest-cov = "^4.1.0"
-
-
-[tool.pytest.ini_options]
-addopts = "--cov=sql_models --cov-fail-under=80"
-testpaths = ["tests"]
-
-
-[tool.ruff]
-line-length = 80
-indent-width = 4
-target-version = "py311"
-
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
-skip-magic-trailing-comma = false
-line-ending = "auto"
-
-[tool.ruff.lint]
-select = ["F", "I", "N", "PL", "R", "RUF", "S", "UP", "W"]
-ignore = []
-fixable = ["ALL"]
-unfixable = []
-# Allow unused variables when underscore-prefixed
-dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
-
-# https://github.com/astral-sh/ruff/issues/4368
-[tool.ruff.lint.extend-per-file-ignores]
-"tests/**/*.py" = [
-    "S101",    #  Use of `assert` detected
-    "PLR2004", #  Magic value used in comparison
-    "PLR0913", #  Too many arguments in function definition
-]
