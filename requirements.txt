@@ -1,0 +1,4 @@
+duckdb>=1.2.0
+
+# dev
+pre-commit>=4.1.0

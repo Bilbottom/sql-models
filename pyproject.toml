@@ -1,25 +1,16 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "bills-sql-models"
-version = "0.0.4"
+version = "0.0.5"
 description = "Stand-alone SQL models."
 authors = [{name = "Bilbottom"}]
 readme = "README.md"
 requires-python = ">=3.11"
 dynamic = ["dependencies"]
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
 
-
-[tool.poetry]
-package-mode = false
-
-[tool.poetry.dependencies]
-duckdb = "1.2.0"
-
-[tool.poetry.group]
-dev.optional = false
-
-[tool.poetry.group.dev.dependencies]
-pre-commit = "^3.6.2"
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
