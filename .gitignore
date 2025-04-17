@@ -1,10 +1,11 @@
 # Data files
+.tmp/
 *.zip
 *.?sv
 *.xls?
 *.json
-*.db
-*.db.wal
+*.*db
+*.*db.wal
 
 # System files
 .idea/
